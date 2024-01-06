@@ -1,19 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-// NPM MODULES
-
 import Validator from "./Validator";
-import * as T from "@google-cloud/translate";
-import * as TS from "@google-cloud/translate";
+import * as translate from "@google-cloud/translate";
 
-const { Translate } = T.v2;
-const { TranslationServiceClient } = TS;
+const { Translate } = translate.v2;
+const { TranslationServiceClient } = translate;
 
 export class GoogleTranslate {
 
     public async translationLocale(pText: any, pTarget: string): Promise<any> {
         try {
-            console.log('In translationLocale method')
+            console.log('In translationLocale method');
             let configJson = global.appConfig["GM_CONTENT_GOOGLE_TRANSLATE_CREDENTIALS"];
             console.log(`configJson is: ${configJson}`)
             configJson = JSON.parse(configJson);

@@ -5,10 +5,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@google-cloud/translate": "^6.2.0",
-    "@iamtraction/google-translate": "^1.1.2",
-    "google-translate-api": "^2.3.0",
-    "googleapis": "^39.2.0"
+    "@google-cloud/translate": "^6.2.0"
   },
   "author": "",
   "license": "ISC"
