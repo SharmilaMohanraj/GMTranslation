@@ -15,11 +15,10 @@ const TranslationServiceClient = translate.TranslationServiceClient;
 let GoogleTranslate = class GoogleTranslate {
     async translationLocale(pText, pTarget) {
         try {
-            console.log('In translationLocale method');
             let configJson = global.appConfig["GM_CONTENT_GOOGLE_TRANSLATE_CREDENTIALS"];
-            console.log(`configJson is: ${configJson}`);
             configJson = JSON.parse(configJson);
-            const translate = new Translate({ credentials: configJson });
+            const projectId = configJson.project_id;
+            const translate = new Translate({ projectId: projectId, credentials: configJson });
             const translatePromises = [];
             let translations = [];
             let promiseResponse;

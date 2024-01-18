@@ -8,11 +8,10 @@ export class GoogleTranslate {
 
     public async translationLocale(pText: any, pTarget: string): Promise<any> {
         try {
-            console.log('In translationLocale method');
             let configJson = global.appConfig["GM_CONTENT_GOOGLE_TRANSLATE_CREDENTIALS"];
-            console.log(`configJson is: ${configJson}`)
             configJson = JSON.parse(configJson);
-            const translate = new Translate({ credentials: configJson });
+            const projectId = configJson.project_id;
+            const translate = new Translate({ projectId: projectId, credentials: configJson });
             const translatePromises: any = [];
             let translations: any = [];
             let promiseResponse: any;
