@@ -88,7 +88,7 @@ let GoogleTranslate = class GoogleTranslate {
             parent: `projects/${projectId}/locations/${location}`,
             contents: null,
             mimeType: 'text/plain',
-            sourceLanguageCode: 'en',
+            // sourceLanguageCode: 'en',
             targetLanguageCode: pTarget,
             glossaryConfig: glossaryConfig,
         };
@@ -109,18 +109,9 @@ let GoogleTranslate = class GoogleTranslate {
                             translations.push(item.translatedText);
                         });
                     }
-                    else {
-                        console.log('translateTextWithGlossary:translateText:NULL:');
-                        chunkTexts.forEach((item) => {
-                            translations.push(item);
-                        });
-                    }
-                }
-                catch (tError) {
-                    console.log('translateTextWithGlossary:translateText:error:', tError);
-                    chunkTexts.forEach((item) => {
-                        translations.push(item);
-                    });
+                } catch (error) {
+                    console.log('translateTextWithGlossary:translateText:error:', error);
+                    return { error, data: null, locale: pTarget };
                 }
             }
             console.log('translateTextWithGlossary:translations:', translations.length);

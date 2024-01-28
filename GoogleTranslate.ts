@@ -30,10 +30,6 @@ export class GoogleTranslate {
                 translatePromises.push(translate.translate(pText, pTarget));
                 promiseResponse = await Promise.all(translatePromises);
                 [translations] = promiseResponse[0];
-
-                // translatePromises.push(this.translateLocaleAsDummy(pText, pTarget));
-                // promiseResponse = await Promise.all(translatePromises);
-                // [translations] = promiseResponse;
             }
             translations = (Validator.isNotUndefinedAndNull(translations) && Array.isArray(translations)) ? translations : [translations];
             return ({ error: null, data: translations, locale: pTarget });
@@ -92,7 +88,7 @@ export class GoogleTranslate {
             parent: `projects/${projectId}/locations/${location}`,
             contents: null,
             mimeType: 'text/plain', // mime types: text/plain, text/html
-            sourceLanguageCode: 'en',
+            // sourceLanguageCode: 'en',
             targetLanguageCode: pTarget,
             glossaryConfig: glossaryConfig,
         };
@@ -116,20 +112,12 @@ export class GoogleTranslate {
                         translationResult[0].glossaryTranslations.forEach((item: any) => {
                             translations.push(item.translatedText);
                         });
-                    } else {
-                        console.log('translateTextWithGlossary:translateText:NULL:');
-                        chunkTexts.forEach((item) => {
-                            translations.push(item);
-                        });
                     }
-                } catch (tError) {
-                    console.log('translateTextWithGlossary:translateText:error:', tError);
-                    chunkTexts.forEach((item) => {
-                        translations.push(item);
-                    });
+                } catch (error) {
+                    console.log('translateTextWithGlossary:translateText:error:', error);
+                    return { error, data: null, locale: pTarget };
                 }
             }
-            // console.log('translateTextWithGlossary:translations:', JSON.stringify(translations));
             console.log('translateTextWithGlossary:translations:', translations.length);
             if (translations.length > 0) {
                 console.log('translateTextWithGlossary:textArray:first item after translation:', translations[0]);
