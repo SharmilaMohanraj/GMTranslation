@@ -74,7 +74,7 @@ let GoogleTranslate = class GoogleTranslate {
         console.log("Created glossary:");
         console.log(`InputUri ${glossary.inputConfig.gcsSource.inputUri}`);
     }
-    async translateTextWithGlossary(pText, pTarget) {
+    async translateTextWithGlossary(pText, pSource, pTarget) {
         let configJson = global.appConfig["GM_CONTENT_GOOGLE_TRANSLATE_CREDENTIALS"];
         configJson = JSON.parse(configJson);
         const projectId = configJson.project_id;
@@ -88,7 +88,7 @@ let GoogleTranslate = class GoogleTranslate {
             parent: `projects/${projectId}/locations/${location}`,
             contents: null,
             mimeType: 'text/plain',
-            // sourceLanguageCode: 'en',
+            sourceLanguageCode: pSource,
             targetLanguageCode: pTarget,
             glossaryConfig: glossaryConfig,
         };

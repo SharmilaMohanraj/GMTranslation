@@ -74,7 +74,7 @@ export class GoogleTranslate {
 
 
     // Instantiates a client
-    public async translateTextWithGlossary(pText: any, pTarget: string): Promise<any> {
+    public async translateTextWithGlossary(pText: any, pSource: string, pTarget: string): Promise<any> {
         let configJson = global.appConfig["GM_CONTENT_GOOGLE_TRANSLATE_CREDENTIALS"];
         configJson = JSON.parse(configJson);
         const projectId = configJson.project_id;
@@ -88,7 +88,7 @@ export class GoogleTranslate {
             parent: `projects/${projectId}/locations/${location}`,
             contents: null,
             mimeType: 'text/plain', // mime types: text/plain, text/html
-            // sourceLanguageCode: 'en',
+            sourceLanguageCode: pSource,
             targetLanguageCode: pTarget,
             glossaryConfig: glossaryConfig,
         };
